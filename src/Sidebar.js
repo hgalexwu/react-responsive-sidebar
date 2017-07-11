@@ -67,8 +67,14 @@ class Sidebar extends Component {
        key: idx,
        hoverHighlight: el.props.hoverHighlight || this.props.hoverHighlight,
        activeHighlight: el.props.activeHighlight || this.props.activeHighlight,
-       onClick: this.onItemSelected,
-     }));
+       // Fix click issue
+       onClick: (e) => {
+           if(el.props.onClick){
+               el.props.onClick(e);
+           };
+           this.onItemSelected(e);
+       }
+    }));
     // const content = React.Children.map(this.props.content, React.cloneElement(item, {
     //   hoverHighlight: item.props.hoverHighlight || this.props.hoverHighlight,
     //   activeHighlight: item.props.activeHighlight || this.props.activeHighlight,
